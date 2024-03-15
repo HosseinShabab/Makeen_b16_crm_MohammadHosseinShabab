@@ -45,7 +45,7 @@ Route::post('/users/create', function (Request $request) {
         "birth_day" => $request->birth_day,
         "country" => $request->country,
     ]);
-    return "User added successfully";
+    return redirect('/users/index');
 });
 
 Route::post('/users/edit/{id}', function (Request $request, $id) {
@@ -60,7 +60,7 @@ Route::post('/users/edit/{id}', function (Request $request, $id) {
         "birth_day" => $request->birth_day,
         "country" => $request->country,
     ]);
-    return "User updated successfully";
+    return redirect('users/index');
 });
 //user delete
 Route::delete('/users/delete/{id}', function ($id) {
@@ -95,7 +95,7 @@ Route::post('/products/create', function (Request $request) {
         "warranty_manufactorer" => $request->warranty_manufactorer,
         "date_of_supply" => $request->date_of_supply,
     ]);
-    return "product added successfully";
+    return redirect('/products/index');;
 });
 
 Route::post('/products/edit/{id}', function (Request $request, $id) {
@@ -109,7 +109,7 @@ Route::post('/products/edit/{id}', function (Request $request, $id) {
         "warranty_manufactorer" => $request->warranty_manufactorer,
         "date_of_supply" => $request->date_of_supply,
     ]);
-    return "product updated successfully";
+    return redirect('/products/index');;
 });
 //product delete
 
@@ -145,7 +145,7 @@ Route::post('/orders/create', function (Request $request) {
         "payment_method" => $request->payment_method,
         "address" => $request->address,
     ]);
-    return "order added successfully ";
+    return redirect('/orders/index');
 });
 
 Route::post('/orders/edit/{id}',function(Request $request, $id){
@@ -166,4 +166,22 @@ Route::post('/orders/edit/{id}',function(Request $request, $id){
 Route::delete('/orders/delete/{id}', function($id){
     DB::table('orders')->where("id",$id)->delete();
     return redirect('/orders/index');
+});
+
+// posts get
+Route::get('/posts/index', function () {
+    return view('posts.index');
+});
+
+// categories get
+Route::get('/categories/index', function () {
+    return view('categories.index');
+});
+
+Route::get('/categories/create', function(){
+    return view('categories.create');
+});
+
+Route::get('/categories/edit', function(){
+    return view('categories.edit');
 });

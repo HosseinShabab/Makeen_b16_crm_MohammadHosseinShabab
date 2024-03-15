@@ -17,70 +17,22 @@
       <!-- Links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="http://localhost/projects/crm/user/user.php"> کاربران جدید</a>
+          <a class="nav-link" href="/users/index"> کاربران جدید</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://localhost/projects/crm/product/product.php">محصولات </a>
-        </li>
-        <div class="dropdown">
-          <button type="button" class="btn btn-light  dropdown-toggle" data-bs-toggle="dropdown">
-            دسته بندی محصولات
-          </button>
-          <ul class="dropdown-menu">
-            <li> ایرانی</li>
-            <ul>
-              </li><a class="dropdown-item" href="#">سایپا</a></li>
-              </li><a class="dropdown-item" href="#">ایران خودرو</a></li>
-            </ul>
-            <li>خارجی</li>
-            <ul>
-              <li>هاچ بک</li>
-              <ul>
-                </li><a class="dropdown-item" href="#">citron</a></li>
-                </li><a class="dropdown-item" href="#">BMW</a></li>
-                </li><a class="dropdown-item" href="#">alfaromeo</a></li>
-              </ul>
-              <li>suv</li>
-              <ul>
-                <li>HWD</li>
-                <ul>
-                  </li><a class="dropdown-item" href="#">hyundai</a></li>
-                  </li><a class="dropdown-item" href="#">kia</a></li>
-                </ul>
-                <li>AWD</li>
-                <ul>
-                  </li><a class="dropdown-item" href="#">kia </a></li>
-                  </li><a class="dropdown-item" href="#">hyundai</a></li>
-                </ul>
-              </ul>
-              <li>سدان</li>
-              <ul>
-                </li><a class="dropdown-item" href="#">mitsubishi</a></li>
-                </li><a class="dropdown-item" href="#">kia</a></li>
-              </ul>
-              <li>کوپه</li>
-              <ul>
-                </li><a class="dropdown-item" href="#">maserati</a></li>
-                </li><a class="dropdown-item" href="#">ford</a></li>
-                </li><a class="dropdown-item" href="#">astonmartin</a></li>
-                </li><a class="dropdown-item" href="#">lamborghini</a></li>
-                </li><a class="dropdown-item" href="#">jaguar</a></li>
-
-              </ul>
-            </ul>
-          </ul>
-
-        </div>
-
-        <li class="nav-item">
-          <a class="nav-link" href="http://localhost/projects/crm/order/order.php"> سفارشات</a>
+          <a class="nav-link" href="/products/index">محصولات </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://localhost/projects/crm/post.html"> وبلاگ</a>
+          <a class="nav-link" href="/orders/index"> سفارشات</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/posts/index"> وبلاگ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/categories/index">دسته بندی</a>
         </li>
       </ul>
     </div>
-
   </nav>
   <table class="table table-bordered">
     <thead>
