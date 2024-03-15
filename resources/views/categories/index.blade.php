@@ -44,21 +44,20 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($categories as $category)
                 <tr>
-                    <td>{{ -> }}</td>
-                    <td>{{ -> }}</td>
-                    <td>{{ -> }}</td>
-                    <td>{{ -> }}</td>
-                    <td>{{ -> }}</td>
+                    <td>{{ $category->category_name }}</td>
+                    <td>{{ $category->category_id }}</td>
                     <td>
-                        <a href="/categories/edit/{{  }}"><button class="btn btn-dark">Edit</button></a>
-                        <form action="/categoreis/delete/{{}}" method="POST">
+                        <a href="/categories/edit/{{$category->id }}"><button class="btn btn-dark">Edit</button></a>
+                        <form action="/categories/delete/{{ $category->id  }}" method="POST">
                             @csrf
                             @method('delete')
                             <input type="submit" value="Delete">
                         </form>
                     </td>
                 </tr>
+            @endforeach
         </tbody>
         <br>
         <br>

@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Psy\Command\WhereamiCommand;
+
+use function Laravel\Prompts\table;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,13 +178,37 @@ Route::get('/posts/index', function () {
 
 // categories get
 Route::get('/categories/index', function () {
-    return view('categories.index');
+    $categories = DB::table('categories')->get();
+    return view('categories.index', ["categories"=> $categories]);
 });
 
 Route::get('/categories/create', function(){
     return view('categories.create');
 });
 
-Route::get('/categories/edit', function(){
-    return view('categories.edit');
+Route::get('/categories/edit/{id}', function($id){
+    $category = DB::table('categories')->where('id',$id)->first();
+    return view('categories.edit', ["category"=>$category]);
 });
+ // categories post
+ Route::post('/categories/create', function(Request $request){
+    DB::table('categories')->insert([
+        'category_name' => $request->category_name,
+        'category_id' => $request->category_id,
+    ]);
+    return redirect('/categories/index');
+ });
+
+ Route::post('/categories/edit/{id}', function(Request $request, $id){
+    DB::table("categories")->where("id",$id)->update([
+        'category_name' => $request->category_name,
+        'category_id' => $request->category_id,
+    ]);
+    return redirect('/categories/index');
+ });
+
+ //categories delete
+ Route::delete('/categories/delete/{id}', function($id){
+    DB::table('categories')->where('id',$id)->delete();
+    return redirect('/categories/index');
+ });
