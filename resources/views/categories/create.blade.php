@@ -18,7 +18,7 @@
         </div>
         <div style="padding-left: 95%;">
             <label for="pwd" class="form-label">عدد دسته:</label>
-            <input type="number" class="form-control" id="" placeholder=" عدد دسته را وارد کنید" name="category_number" value="" required>
+            <input type="number" class="form-control" id="" placeholder=" عدد دسته را وارد کنید" name="category_id" value="" required>
         </div>
         <button type="submit" class="btn btn-primary">افزودن</button>
     </form>
