@@ -171,11 +171,6 @@ Route::delete('/orders/delete/{id}', function($id){
     return redirect('/orders/index');
 });
 
-// posts get
-Route::get('/posts/index', function () {
-    return view('posts.index');
-});
-
 // categories get
 Route::get('/categories/index', function () {
     $categories = DB::table('categories')->get();
@@ -212,3 +207,43 @@ Route::get('/categories/edit/{id}', function($id){
     DB::table('categories')->where('id',$id)->delete();
     return redirect('/categories/index');
  });
+
+ // posts get
+Route::get("/posts/create", function(){
+    $categories_id = DB::table('categories')->select("category_id")->get();
+    return view('/posts/create',["categories_id"=> $categories_id]);
+});
+
+Route::get('/posts/index', function () {
+    $posts = DB::table('posts')->get();
+    return view('posts.index', ['posts'=> $posts]);
+});
+
+Route::get('/posts/edit/{id}', function($id){
+    $post = DB::table('posts')->where("id",$id)->first();
+    $categories_id = DB::table('categories')->select("category_id")->get();
+    return view('posts.edit', ['post'=>$post , 'categories_id'=>$categories_id]);
+});
+
+// posts post
+Route::post('/posts/create', function(Request $request){
+    DB::table('posts')->insert([
+        "post_title"=> $request->post_title,
+        "post_content"=> $request->post_content,
+        "category_id"=> $request->category_id,
+    ]);
+   return redirect('/posts/index');
+});
+Route::post('/posts/edit/{id}', function(Request $request, $id){
+    DB::table('posts')->where("id", $id)->update([
+        "post_title"=> $request->post_title,
+        "post_content"=> $request->post_content,
+        "category_id"=> $request->category_id,
+    ]);
+    return redirect('/posts/index');
+});
+// posts delete
+Route::delete('/posts/delete/{id}',function($id){
+    DB::table('posts')->where('id',$id)->delete();
+    return redirect('posts/index');
+});

@@ -39,27 +39,26 @@
         <thead>
             <tr>
                 <th>عنوان</th>
-                <th>توضیحات</th>
                 <th>دسته بندی</th>
-                <th><a href="/products/create"><button>ایجاد وبلاگ جدید</button></a></th>
+                <th><a href="/posts/create"><button>ایجاد وبلاگ جدید</button></a></th>
             </tr>
         </thead>
         <tbody>
-                <tr>
-                    <td>{{ -> }}</td>
-                    <td>{{ -> }}</td>
-                    <td>{{ -> }}</td>
-                    <td>{{ -> }}</td>
-                    <td>{{ -> }}</td>
-                    <td>
-                        <a href="/posts/edit/{{  }}"><button class="btn btn-dark">Edit</button></a>
-                        <form action="/posts/delete/{{}}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <input type="submit" value="Delete">
-                        </form>
-                    </td>
-                </tr>
+            @foreach ($posts as $post)
+
+            <tr>
+                <td>{{$post ->post_title }}</td>
+                <td>{{ $post->category_id }}</td>
+                <td>
+                    <a href="/posts/edit/{{ $post->id  }}"><button class="btn btn-dark">Edit</button></a>
+                    <form action="/posts/delete/{{ $post->id }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            @endforeach
         </tbody>
         <br>
         <br>
