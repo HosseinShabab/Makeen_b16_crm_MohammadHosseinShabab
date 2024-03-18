@@ -11,7 +11,7 @@ class CreateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,13 +23,13 @@ class CreateProductRequest extends FormRequest
     {
         return [
             "product_name" =>"required|string|max:255",
-            "color" =>"required|string|max:25",
+            // "color" =>"required|string|max:25",
             "manufactorer" =>"required|string|max:255",
             "amount" =>"required|integer|max_digits:6",
-            "price" =>"required|integer|max:8",
-            "warranty" =>"required|enum",
+            "price" =>"required|integer|max_digits:8",
+            "warranty" =>"required|string",
             "warranty_manufactorer" =>"required|string|max:255",
-            "date_of_supply" =>"required|date",
+            // "date_of_supply" =>"required|date",
         ];
     }
 }
