@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -21,55 +22,19 @@ use function Laravel\Prompts\table;
 Route::get('/', function () {
     return view('welcome');
 });
-//User get :
-Route::get('/users/create', function () {
-    return view('users.create');
-});
+//User get :.....................................................................................................
+Route::get('/users/create', [UserController::class, 'create'] );
 
-Route::get('/users/edit/{id}', function ($id) {
-    $user = DB::table('users')->where('id', $id)->first();
-    return view('users.edit', ["user" => $user]);
-});
+Route::get('/users/edit/{id}', [UserController::class, 'edit']);
 
-Route::get('/users/index', function () {
-    $users = DB::table('users')->get();
-    return view('users.index', ["users" => $users]);
-});
+Route::get('/users/index',[UserController::class, 'index']);
 //User post :
-Route::post('/users/create', function (Request $request) {
-    DB::table('users')->insert([
-        "first_name" => $request->first_name,
-        "last_name" => $request->last_name,
-        "gmail" => $request->gmail,
-        "password" => $request->password,
-        "age" => $request->age,
-        "jender" => $request->jender,
-        "address" => $request->address,
-        "birth_day" => $request->birth_day,
-        "country" => $request->country,
-    ]);
-    return redirect('/users/index');
-});
+Route::post('/users/create', [UserController::class, 'store']);
 
-Route::post('/users/edit/{id}', function (Request $request, $id) {
-    DB::table('users')->where('id', $id)->update([
-        "first_name" => $request->first_name,
-        "last_name" => $request->last_name,
-        "gmail" => $request->gmail,
-        "password" => $request->password,
-        "age" => $request->age,
-        "jender" => $request->jender,
-        "address" => $request->address,
-        "birth_day" => $request->birth_day,
-        "country" => $request->country,
-    ]);
-    return redirect('users/index');
-});
+Route::post('/users/edit/{id}', [UserController::class, 'update']);
 //user delete
-Route::delete('/users/delete/{id}', function ($id) {
-    DB::table('users')->where("id", $id)->delete();
-    return redirect("/users/index");
-});
+Route::delete('/users/delete/{id}', [UserController::class,'destroy']);
+//.................................................................................................................
 //Product get
 
 Route::get('/products/create', function () {
