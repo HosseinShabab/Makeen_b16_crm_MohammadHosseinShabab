@@ -52,7 +52,7 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $post = DB::table('posts')->where("id",$id)->first();
-        $categories_id = DB::table('categories')->select("category_id")->get();
+        $categories_id = DB::table('categories')->select("category_id", "category_name")->get();
         return view('posts.edit', ['post'=>$post , 'categories_id'=>$categories_id]);
     }
 

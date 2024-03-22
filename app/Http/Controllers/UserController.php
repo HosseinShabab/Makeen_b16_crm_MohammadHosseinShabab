@@ -30,18 +30,8 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        DB::table('users')->insert([
-            "first_name" => $request->first_name,
-            "last_name" => $request->last_name,
-            "gmail" => $request->gmail,
-            "password" => $request->password,
-            "age" => $request->age,
-            "jender" => $request->jender,
-            "address" => $request->address,
-            "birth_day" => $request->birth_day,
-            "country" => $request->country,
-        ]);
-        return redirect('/users/index');
+        DB::table('users')->insert($request->except('_token'));
+        return redirect()->route('users.index');
     }
 
     /**
@@ -66,18 +56,8 @@ class UserController extends Controller
      */
     public function update(CreateUserRequest $request, string $id)
     {
-        DB::table('users')->where('id', $id)->update([
-            "first_name" => $request->first_name,
-            "last_name" => $request->last_name,
-            "gmail" => $request->gmail,
-            "password" => $request->password,
-            "age" => $request->age,
-            "jender" => $request->jender,
-            "address" => $request->address,
-            "birth_day" => $request->birth_day,
-            "country" => $request->country,
-        ]);
-        return redirect('users/index');
+        DB::table('users')->where('id', $id)->update($request->except('_token'));
+        return redirect()->route('users.index');
     }
 
     /**
@@ -86,6 +66,6 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         DB::table('users')->where("id", $id)->delete();
-        return redirect("/users/index");
+        return redirect()->route('users.index');
     }
 }

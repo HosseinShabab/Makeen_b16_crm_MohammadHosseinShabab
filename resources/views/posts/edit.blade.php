@@ -21,7 +21,7 @@
         <hr>
         <select name="category_id"  >
             @foreach ($categories_id as $category_id )
-                <option value="{{$category_id->category_id}}" {{$category_id->category_id == $post->category_id ? "selected" : ""}}>{{$category_id->category_id}}</option>
+                <option value="{{$category_id->category_id}}" {{$category_id->category_id == $post->category_id ? "selected" : ""}}>{{$category_id->category_name}}</option>
             @endforeach
         </select>
         <br>

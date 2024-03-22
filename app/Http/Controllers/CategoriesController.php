@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\CreatCategoryRequest;
+use App\Http\Requests\CreateCategoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class CategoriesController extends Controller
@@ -26,7 +26,7 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreatCategoryRequest $request)
+    public function store(CreateCategoryRequest $request)
     {
         DB::table('categories')->insert([
             'category_name' => $request->category_name,
@@ -55,7 +55,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreatCategoryRequest $request, string $id)
+    public function update(CreateCategoryRequest $request, string $id)
     {
         DB::table("categories")->where("id",$id)->update([
             'category_name' => $request->category_name,
