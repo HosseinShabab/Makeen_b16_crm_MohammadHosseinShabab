@@ -24,7 +24,7 @@ class CreateUserRequest extends FormRequest
         return [
             "first_name"=>"required|string|max:255",
             "last_name"=>"required|string|max:255",
-            "gmail"=>"required|string|max:255",
+            "gmail"=>"required|string|max:255|unique:users,gmail,".$this->id,
             "password"=>"required|string|max:255",
             "age"=>"required|integer|max_digits:3",
             "jender"=>"required|string",
