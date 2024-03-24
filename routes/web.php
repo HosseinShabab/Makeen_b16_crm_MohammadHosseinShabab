@@ -27,7 +27,7 @@ use function Laravel\Prompts\table;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group([ 'prefix'=>'users', 'as'=>'users.'], function () {
+Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
     //User get :.....................................................................................................
     Route::get('create', [UserController::class, 'create'])->name('create');
 
@@ -43,21 +43,17 @@ Route::group([ 'prefix'=>'users', 'as'=>'users.'], function () {
     //.................................................................................................................
 });
 
-//Product get
-
-Route::get('/products/create', [ProductController::class, 'create']);
-
-Route::get('/products/edit/{id}', [ProductController::class, 'edit']);
-
-Route::get('products/index', [ProductController::class, 'index']);
-
-//Product post
-Route::post('/products/create', [ProductController::class, 'store']);
-
-Route::post('/products/edit/{id}', [ProductController::class, 'update']);
-//product delete
-
-Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
+Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
+    //Product get
+    Route::get('create', [ProductController::class, 'create'])->name('create');
+    Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit');
+    Route::get('index', [ProductController::class, 'index'])->name('index');
+    //Product post
+    Route::post('/create', [ProductController::class, 'store'])->name('store');
+    Route::post('edit/{id}', [ProductController::class, 'update'])->name('update');
+    //product delete
+    Route::delete('delete/{id}', [ProductController::class, 'destroy'])->name('destroy');
+});
 //Order get.....................................................................
 
 Route::get('/orders/create', [OrderController::class, 'create']);

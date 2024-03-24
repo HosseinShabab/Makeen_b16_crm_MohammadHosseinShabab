@@ -30,17 +30,8 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        DB::table('products')->insert([
-            "product_name" => $request->product_name,
-            "color" => $request->color,
-            "manufactorer" => $request->manufactorer,
-            "amount" => $request->amount,
-            "price" => $request->price,
-            "warranty" => $request->warranty,
-            "warranty_manufactorer" => $request->warranty_manufactorer,
-            "date_of_supply" => $request->date_of_supply,
-        ]);
-        return redirect('/products/index');
+        DB::table('products')->insert($request->except('_token'));
+        return redirect()->route('products.index');
     }
 
     /**
@@ -65,17 +56,8 @@ class ProductController extends Controller
      */
     public function update(CreateProductRequest $request, string $id)
     {
-        DB::table("products")->where('id', $id)->update([
-            "product_name" => $request->product_name,
-            "color" => $request->color,
-            "manufactorer" => $request->manufactorer,
-            "amount" => $request->amount,
-            "price" => $request->price,
-            "warranty" => $request->warranty,
-            "warranty_manufactorer" => $request->warranty_manufactorer,
-            "date_of_supply" => $request->date_of_supply,
-        ]);
-        return redirect('/products/index');
+        DB::table("products")->where('id', $id)->update($request->except('_token'));
+        return redirect()->route('products.index');
     }
 
     /**
@@ -84,6 +66,6 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         DB::table('products')->where('id', $id)->delete();
-        return redirect('/products/index');
+        return redirect()->route('products.index');
     }
 }
