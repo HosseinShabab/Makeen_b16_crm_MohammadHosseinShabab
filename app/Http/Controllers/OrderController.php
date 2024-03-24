@@ -29,16 +29,8 @@ class OrderController extends Controller
      */
     public function store(CreateOrderRequest $request)
     {
-        DB::table('orders')->insert([
-            "buyer_first_name" => $request->buyer_first_name,
-            "buyer_last_name" => $request->buyer_last_name,
-            "buyer_gmail" => $request->buyer_gmail,
-            "product_name" => $request->product_name,
-            "color" => $request->color,
-            "payment_method" => $request->payment_method,
-            "address" => $request->address,
-        ]);
-        return redirect('/orders/index');
+        DB::table('orders')->insert($request->except('_token'));
+        return redirect()->route('orders.index');
     }
 
     /**
@@ -63,16 +55,8 @@ class OrderController extends Controller
      */
     public function update(CreateOrderRequest $request, string $id)
     {
-        DB::table('orders')->where('id', $id)->update([
-            "buyer_first_name" => $request->buyer_first_name,
-            "buyer_last_name" => $request->buyer_last_name,
-            "buyer_gmail" => $request->buyer_gmail,
-            "product_name" => $request->product_name,
-            "color" => $request->color,
-            "payment_method" => $request->payment_method,
-            "address" => $request->address,
-        ]);
-        return redirect('/orders/index');
+        DB::table('orders')->where('id', $id)->update($request->except('_token'));
+        return redirect()->route('orders.index');
     }
 
     /**
@@ -81,6 +65,6 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         DB::table('orders')->where("id",$id)->delete();
-        return redirect('/orders/index');
+        return redirect()->route('orders.index');
     }
 }
