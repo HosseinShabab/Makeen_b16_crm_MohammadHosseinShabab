@@ -21,7 +21,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories_id = DB::table('categories')->select("category_id")->get();
+        $categories_id = DB::table('categories')->get();
         return view('/posts/create',["categories_id"=> $categories_id]);
     }
 
@@ -30,12 +30,8 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        DB::table('posts')->insert([
-            "post_title"=> $request->post_title,
-            "post_content"=> $request->post_content,
-            "category_id"=> $request->category_id,
-        ]);
-       return redirect('/posts/index');
+        DB::table('posts')->insert($request->except('_token'));
+       return redirect()->route('posts.index');
     }
 
     /**
@@ -61,12 +57,8 @@ class PostController extends Controller
      */
     public function update(CreatePostRequest $request, string $id)
     {
-        DB::table('posts')->where("id", $id)->update([
-            "post_title"=> $request->post_title,
-            "post_content"=> $request->post_content,
-            "category_id"=> $request->category_id,
-        ]);
-        return redirect('/posts/index');
+        DB::table('posts')->where("id", $id)->update($request->except('_token'));
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -75,6 +67,6 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         DB::table('posts')->where('id',$id)->delete();
-        return redirect('posts/index');
+        return redirect()->route('posts.index');
     }
 }
