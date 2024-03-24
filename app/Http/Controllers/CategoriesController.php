@@ -28,11 +28,8 @@ class CategoriesController extends Controller
      */
     public function store(CreateCategoryRequest $request)
     {
-        DB::table('categories')->insert([
-            'category_name' => $request->category_name,
-            'category_id' => $request->category_id,
-        ]);
-        return redirect('/categories/index');
+        DB::table('categories')->insert($request->except('_token'));
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -57,11 +54,8 @@ class CategoriesController extends Controller
      */
     public function update(CreateCategoryRequest $request, string $id)
     {
-        DB::table("categories")->where("id",$id)->update([
-            'category_name' => $request->category_name,
-            'category_id' => $request->category_id,
-        ]);
-        return redirect('/categories/index');
+        DB::table("categories")->where("id",$id)->update($request->except('_token'));
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -70,6 +64,6 @@ class CategoriesController extends Controller
     public function destroy(string $id)
     {
         DB::table('categories')->where('id',$id)->delete();
-        return redirect('/categories/index');
+        return redirect()->route('categories.index');
     }
 }

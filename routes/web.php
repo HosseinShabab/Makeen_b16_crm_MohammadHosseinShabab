@@ -80,19 +80,22 @@ route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
     //Order Delete
     Route::delete('delete/{id}', [OrderController::class, 'destroy'])->name('destroy');
 });
-// categories get...................................................................................
-Route::get('/categories/index', [CategoriesController::class, 'index']);
 
-Route::get('/categories/create', [CategoriesController::class, 'create']);
+Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
+    // categories get...................................................................................
+    Route::get('index', [CategoriesController::class, 'index'])->name('index');
 
-Route::get('/categories/edit/{id}', [CategoriesController::class, 'edit']);
-// categories post
-Route::post('/categories/create', [CategoriesController::class, 'store']);
+    Route::get('create', [CategoriesController::class, 'create'])->name('create');
 
-Route::post('/categories/edit/{id}', [CategoriesController::class, 'update']);
+    Route::get('edit/{id}', [CategoriesController::class, 'edit'])->name('edit');
+    // categories post
+    Route::post('create', [CategoriesController::class, 'store'])->name('store');
 
-//categories delete
-Route::delete('/categories/delete/{id}', [CategoriesController::class, 'destroy']);
+    Route::post('edit/{id}', [CategoriesController::class, 'update'])->name('update');
+
+    //categories delete
+    Route::delete('delete/{id}', [CategoriesController::class, 'destroy'])->name('destory');
+});
 
 // posts get.........................................................................................
 Route::get("/posts/create", [PostController::class, 'create']);

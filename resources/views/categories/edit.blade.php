@@ -10,7 +10,7 @@
 
 <body style="padding: 5%;">
     <h1>ویرایش دسته</h1>
-    <form action="/categories/edit/{{$category->category_id}}" method="post">
+    <form action="/categories/edit/{{$category->id}}" method="post">
         @csrf
         <div class="mb-3">
             <label for="pwd" class="form-label">نام دسته :</label>
