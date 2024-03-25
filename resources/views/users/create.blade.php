@@ -14,6 +14,16 @@
 
     <form action="/users/create" method="post">
         @csrf
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="mb-3">
             <label for="pwd" class="form-label">نام :</label>
             <input type="text" class="form-control" id="pwd" placeholder="نام خود را وارد کنید"
@@ -60,7 +70,8 @@
             <label for="pwd" class="form-label">تاریخ تولد:</label>
             <input type="date" class="form-control" id="pwd" placeholder="تاریخ تولد خود را وارد کنید   "
                 name="birth_day" value="">
-        </div><div class="mb-3">
+        </div>
+        <div class="mb-3">
             <label for="pwd" class="form-label">کشور :</label>
             <input type="text" class="form-control" id="pwd" placeholder=" کشور خود را وارد کنید"
                 name="country" value="">

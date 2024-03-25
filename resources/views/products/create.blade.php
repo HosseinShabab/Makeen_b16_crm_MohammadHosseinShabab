@@ -12,6 +12,16 @@
     <h1>افزودن محصول</h1>
     <form action="/products/create" method="post">
         @csrf
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="mb-3">
             <label for="pwd" class="form-label">نام محصول :</label>
             <input type="text" class="form-control" id="" placeholder="نام محصول خود را وارد کنید"

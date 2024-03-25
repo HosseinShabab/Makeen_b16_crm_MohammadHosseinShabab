@@ -9,10 +9,21 @@
 </head>
 
 <body style="padding: 5%;">
-        <h1>ایجاد سفارش</h1>
+    <h1>ایجاد سفارش</h1>
 
     <form action="/orders/create" method="post">
         @csrf
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="mb-3">
             <label for="pwd" class="form-label">نام خریدار:</label>
             <input type="text" class="form-control" id="pwd" placeholder="نام خریدار را وارد کنید"
@@ -30,13 +41,13 @@
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label"> نام محصول:</label>
-            <input type="text" class="form-control" id="pwd" placeholder="نام محصول را وارد کنید" name="product_name"
-                value="" required>
+            <input type="text" class="form-control" id="pwd" placeholder="نام محصول را وارد کنید"
+                name="product_name" value="" required>
         </div>
         <div style="padding-left: 95%;">
             <label for="pwd" class="form-label">رنگ:</label>
-            <input type="color" class="form-control" id="pwd" placeholder="رنگ محصول را وارد کنید" name="color"
-                value="">
+            <input type="color" class="form-control" id="pwd" placeholder="رنگ محصول را وارد کنید"
+                name="color" value="">
         </div>
         <div class="mb-3">
             <h6>نحوه پرداخت</h6>
@@ -47,8 +58,8 @@
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label">آدرس:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="آدرس خود را وارد کنید" name="address"
-                value="">
+            <input type="password" class="form-control" id="pwd" placeholder="آدرس خود را وارد کنید"
+                name="address" value="">
         </div>
 
         <button class="btn btn-primary">افزودن</button>

@@ -10,42 +10,62 @@
 
 <body style="padding: 5%;">
     <h1>ویرایش محصول</h1>
-  <form action="/products/edit/{{$product->id}}" method="post">
-    @csrf
+    <form action="/products/edit/{{ $product->id }}" method="post">
+        @csrf
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="mb-3">
             <label for="pwd" class="form-label">نام محصول :</label>
-            <input type="text" class="form-control" id="" placeholder="نام محصول خود را وارد کنید" name="product_name" value="{{$product->product_name}}" required>
+            <input type="text" class="form-control" id="" placeholder="نام محصول خود را وارد کنید"
+                name="product_name" value="{{ $product->product_name }}" required>
         </div>
         <div style="padding-left: 95%;">
-            <label for="pwd" class="form-label">رنگ  :</label>
-            <input type="color" class="form-control" id="" placeholder="رنگ محصول را وارد کنید" name="color" value="{{$product->color}}" required>
+            <label for="pwd" class="form-label">رنگ :</label>
+            <input type="color" class="form-control" id="" placeholder="رنگ محصول را وارد کنید"
+                name="color" value="{{ $product->color }}" required>
         </div>
         <div class="mb-3 mt-3">
             <label for="email" class="form-label">شرکت سازنده:</label>
-            <input type="text" class="form-control" id="" placeholder="شرکت سازنده را وارد کنید" name="manufactorer" value="{{$product->manufactorer}}" required>
+            <input type="text" class="form-control" id="" placeholder="شرکت سازنده را وارد کنید"
+                name="manufactorer" value="{{ $product->manufactorer }}" required>
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label">تعداد:</label>
-            <input type="number" class="form-control" id="" placeholder="تعداد را وارد کنید" name="amount" value="{{$product->amount}}" required>
+            <input type="number" class="form-control" id="" placeholder="تعداد را وارد کنید" name="amount"
+                value="{{ $product->amount }}" required>
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label">قیمت:</label>
-            <input type="number" class="form-control" id="" placeholder="قیمت را وارد کنید" name="price" value="{{$product->price}}" readonly>
+            <input type="number" class="form-control" id="" placeholder="قیمت را وارد کنید" name="price"
+                value="{{ $product->price }}" readonly>
         </div>
         <div class="mb-3">
             <h6>گارانتی</h6>
-        <input type="radio" id="waranty" name="warranty" value="include" {{$product->warranty == 'include' ? 'checked' : ""}}>
-        <label for="male">دارد</label><br>
-        <input type="radio" id="waranty" name="warranty" value="not_include" {{$product->warranty == 'not_include' ? 'checked' : ""}}>
-        <label for="female">ندارد</label><br>
+            <input type="radio" id="waranty" name="warranty" value="include"
+                {{ $product->warranty == 'include' ? 'checked' : '' }}>
+            <label for="male">دارد</label><br>
+            <input type="radio" id="waranty" name="warranty" value="not_include"
+                {{ $product->warranty == 'not_include' ? 'checked' : '' }}>
+            <label for="female">ندارد</label><br>
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label">گارانتی:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="نام شرکت گارانتی را وارد کنید" name="warranty_manufactorer" value="{{$product->warranty_manufactorer}}">
+            <input type="password" class="form-control" id="pwd" placeholder="نام شرکت گارانتی را وارد کنید"
+                name="warranty_manufactorer" value="{{ $product->warranty_manufactorer }}">
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label">تاریخ عرضه:</label>
-            <input type="date" class="form-control" id="pwd" placeholder="تاریخ عرضه محصول را وارد کنید   " name="date_of_supply" value="{{$product->date_of_supply}}">
+            <input type="date" class="form-control" id="pwd" placeholder="تاریخ عرضه محصول را وارد کنید   "
+                name="date_of_supply" value="{{ $product->date_of_supply }}">
         </div>
         <button type="submit" class="btn btn-primary">ویرایش</button>
     </form>

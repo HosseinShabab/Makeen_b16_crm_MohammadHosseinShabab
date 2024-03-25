@@ -12,16 +12,28 @@
     <h1>افزودن وبلاگ</h1>
     <form action="/posts/create" method="post">
         @csrf
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="mb-3">
             <label for="pwd" class="form-label">عنوان وبلاگ :</label>
-            <input type="text" class="form-control"  placeholder="عنوان وبلاگ خود را وارد کنید" name="post_title" value="" required>
+            <input type="text" class="form-control" placeholder="عنوان وبلاگ خود را وارد کنید" name="post_title"
+                value="" required>
         </div>
-        <textarea name="post_content"  cols="30" rows="10" placeholder="مطلب را وارد کنید"></textarea>
+        <textarea name="post_content" cols="30" rows="10" placeholder="مطلب را وارد کنید"></textarea>
         <br>
         <hr>
-        <select name="category_id" >
-            @foreach ($categories_id as $category_id )
-                <option value="{{$category_id->category_id}}">{{$category_id->category_name}}</option>
+        <select name="category_id">
+            @foreach ($categories_id as $category_id)
+                <option value="{{ $category_id->category_id }}">{{ $category_id->category_name }}</option>
             @endforeach
         </select>
         <br>
