@@ -8,64 +8,32 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index($id = null)
     {
-        $users = DB::table('users')->get();
-        return view('users.index', ["users" => $users]);
+        if($id==null){
+            $users = DB::table('users')->orderBy('id','desc')->paginate(10);
+        }else{
+        $users = DB::table('users')->where("id", $id)->first();
+        }
+        return response()->json($users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('users.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(CreateUserRequest $request)
     {
-        DB::table('users')->insert($request->except('_token'));
-        return redirect()->route('users.index');
+        $user = DB::table('users')->insert($request->toArray());
+        return response()->json($user);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(CreateUserRequest $request, $id)
     {
-        //
+        $user = DB::table('users')->where('id', $id)->update($request->toArray());
+        return response()->json($user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $user = DB::table('users')->where('id', $id)->first();
-        return view('users.edit', ["user" => $user]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(CreateUserRequest $request, string $id)
-    {
-        DB::table('users')->where('id', $id)->update($request->except('_token'));
-        return redirect()->route('users.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        DB::table('users')->where("id", $id)->delete();
-        return redirect()->route('users.index');
+        $user=DB::table('users')->where("id", $id)->delete();
+        return response()->json($user);
     }
 }
