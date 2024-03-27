@@ -11,9 +11,9 @@ class OrderController extends Controller
     public function index($id = null)
     {
         if ($id == null) {
-            $orders = DB::table('orders')->orderBy('id', 'desc')->paginate(10);
+            $orders = DB::table('orders')->join('users','orders.user_id', '=', 'users.id')->leftJoin('products', 'orders.product_id','=','products.id')->select('orders.*', 'users.first_name','users.last_name', 'users.gmail','users.address','products.product_name','products.color')->orderBy('id', 'desc')->paginate(10);
         }else{
-            $orders = DB::table('orders')->where('id', $id)->first();
+            $orders = DB::table('orders')->join('users','orders.user_id', '=', 'users.id')->leftJoin('products', 'orders.product_id','=','products.id')->where('orders.id', $id)->select('orders.*', 'users.first_name','users.last_name', 'users.gmail','users.address','products.product_name','products.color')->first();
         }
         return response()->json($orders);
     }

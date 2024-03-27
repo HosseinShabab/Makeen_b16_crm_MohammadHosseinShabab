@@ -22,13 +22,9 @@ class CreateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "buyer_first_name" => "required|string|max:255",
-            "buyer_last_name" => "required|string|max:255",
-            "buyer_gmail" => "required|string|max:255",
-            // "product_name" =>"required|string|max:255",
-            "color" => "required|string|max:25",
+            "user_id" => "required|integer",
+            "product_id"=> "required|integer",
             "payment_method" =>"required|string",
-            "address" => "required|string|max:255",
         ];
     }
 }

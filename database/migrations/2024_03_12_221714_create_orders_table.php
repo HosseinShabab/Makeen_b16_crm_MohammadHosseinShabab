@@ -13,13 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('buyer_first_name');
-            $table->string('buyer_last_name');
-            $table->string('buyer_gmail')->unique();
-            $table->string('product_name');
-            $table->string('color');
+            $table->bigInteger('user_id');
+            $table->bigInteger('product_id');
             $table->enum('payment_method',['online','in_person']);
-            $table->string('address');
             $table->timestamps();
         });
     }

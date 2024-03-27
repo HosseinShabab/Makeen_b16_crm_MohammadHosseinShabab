@@ -30,8 +30,8 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
 
 Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
 
-    Route::get('index{id?}', [ProductController::class, 'index'])->name('index');
-    Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit');
+    Route::get('index/{id?}', [ProductController::class, 'index'])->name('index');
+    Route::put('edit/{id}', [ProductController::class, 'edit'])->name('edit');
     Route::post('/create', [ProductController::class, 'store'])->name('store');
     Route::delete('delete/{id}', [ProductController::class, 'destroy'])->name('destroy');
 });
@@ -39,7 +39,7 @@ route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
 
 
     Route::get('index/{id?}', [OrderController::class, 'index'])->name('index');
-    Route::get('edit/{id}', [OrderController::class, 'edit'])->name('edit');
+    Route::put('edit/{id}', [OrderController::class, 'edit'])->name('edit');
     Route::post('create', [OrderController::class, 'store'])->name('store');
     Route::delete('delete/{id}', [OrderController::class, 'destroy'])->name('destroy');
 });
@@ -47,15 +47,15 @@ route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
 Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
 
     Route::get('index/{id?}', [CategoriesController::class, 'index'])->name('index');
-    Route::get('edit/{id}', [CategoriesController::class, 'edit'])->name('edit');
+    Route::put('edit/{id}', [CategoriesController::class, 'edit'])->name('edit');
     Route::post('create', [CategoriesController::class, 'store'])->name('store');
     Route::delete('delete/{id}', [CategoriesController::class, 'destroy'])->name('destory');
 });
 
 Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
 
-    Route::get('index{id?}', [PostController::class, 'index'])->name('index');
-    Route::get('edit/{id}', [PostController::class, 'edit'])->name('edit');
+    Route::get('index/{id?}', [PostController::class, 'index'])->name('index');
+    Route::put('edit/{id}', [PostController::class, 'edit'])->name('edit');
     Route::post('create', [PostController::class, 'store'])->name('store');
     Route::delete('delete/{id}', [PostController::class, 'destroy'])->name('destory');
 });
