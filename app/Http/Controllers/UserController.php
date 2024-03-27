@@ -11,10 +11,10 @@ class UserController extends Controller
 
     public function index($id = null)
     {
-        if($id==null){
-            $users = DB::table('users')->orderBy('id','desc')->paginate(10);
-        }else{
-        $users = DB::table('users')->where("id", $id)->first();
+        if ($id == null) {
+            $users = DB::table('users')->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $users = DB::table('users')->where("id", $id)->first();
         }
         return response()->json($users);
     }
@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function destroy(string $id)
     {
-        $user=DB::table('users')->where("id", $id)->delete();
+        $user = DB::table('users')->where("id", $id)->delete();
         return response()->json($user);
     }
 }
